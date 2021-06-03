@@ -35,13 +35,21 @@ install-dev-tools() {
     echo -e "${YELLOW}Install Homebrew${CLEAR}"
     CI=1
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew update
+
+    ## NVM
+    echo -e "${YELLOW}Install NVM${CLEAR}"
+    brew install nvm
 
     ## git
     echo -e "${YELLOW}Install GIT${CLEAR}"
-
     brew install git
     git config --global user.email "tilda.lu@trunk-studio.com"
     git config --global user.name "Tilda"
+
+    ## yarn
+    echo -e "${YELLOW}Install yarn${CLEAR}"
+    brew install yarn
 
     ## Visual Studio Code
     echo -e "${YELLOW}Install Visual Studio Code${CLEAR}"
@@ -56,17 +64,27 @@ install-dev-tools() {
     echo -e "${YELLOW}Install Virtual Box ${CLEAR}"
     brew install virtualbox virtualbox-extension-pack
 
-    # Docker, Vagrant
+    ## Docker, Vagrant
     echo -e "${YELLOW}Install Docker & Vagrant${CLEAR}"
     brew install docker vagrant
 
-    #SourceTree
+    ## SourceTree
     echo -e "${YELLOW}Install SourceTree${CLEAR}"
     brew install --cask sourcetree
 
+    ## iTerm2
+    echo -e "${YELLOW}Install iTerm2${CLEAR}"
+    brew install iterm2
+
+    ## Appium
+    echo -e "${YELLOW}Install Appium${CLEAR}"
+    brew install appium
 }
 
 install-basic-tools() {
+    ## Google Chrome
+    echo -e "${YELLOW}Install Google Chrome${CLEAR}"
+    brew install google-chrome
 
     ## Google Drive
     echo -e "${YELLOW}Install Google Drive${CLEAR}"
@@ -85,13 +103,21 @@ install-basic-tools() {
     brew install sketch
     brew install figma
 
-    # Line
+    ## Zeplin
+    echo -e "${YELLOW}Install zeplin ${CLEAR}"
+    brew install zeplin
+
+    ## Line
     echo -e "${YELLOW}Install Line${CLEAR}"
     mas install 539883307
 
-    # AnyDesk
+    ## AnyDesk
     echo -e "${YELLOW}Install AnyDesk${CLEAR}"
     brew install anydesk
+
+    ## Notion
+    echo -e "${YELLOW}Install Notion${CLEAR}"
+    brew install notion
 }
 
 install-others() {
