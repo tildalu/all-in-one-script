@@ -60,8 +60,17 @@ install-dev-tools() {
     echo -e "${YELLOW}Install Docker & Vagrant${CLEAR}"
     brew install docker vagrant
 
+    #SourceTree
+    echo -e "${YELLOW}Install SourceTree${CLEAR}"
+    brew install --cask sourcetree
+
 }
+
 install-basic-tools() {
+
+    ## Google Drive
+    echo -e "${YELLOW}Install Google Drive${CLEAR}"
+    brew install google-drive
 
     ## 1Password
     echo -e "${YELLOW}Install 1Password${CLEAR}"
