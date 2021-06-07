@@ -79,6 +79,10 @@ install-dev-tools() {
     ## Appium
     echo -e "${YELLOW}Install Appium${CLEAR}"
     brew install appium
+
+    ## ngrok
+    echo -e "${YELLOW}Install ngrok${CLEAR}"
+    brew install ngrok
 }
 
 install-basic-tools() {
