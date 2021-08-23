@@ -18,9 +18,12 @@
 #
 #  and now you can call the script any time :)
 
+
 # Text Color Variables
-GREEN='\033[32m' # Green
-CLEAR='\033[0m'  # Clear color and formatting
+GREEN='\033[32m'  # Green
+YELLOW='\033[33m' # YELLOW
+CLEAR='\033[0m'   # Clear color and formatting
+
 
 update-brew() {
     if ! which brew &>/dev/null; then return; fi
