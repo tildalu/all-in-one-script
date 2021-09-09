@@ -18,12 +18,10 @@
 #
 #  and now you can call the script any time :)
 
-
 # Text Color Variables
 GREEN='\033[32m'  # Green
 YELLOW='\033[33m' # YELLOW
 CLEAR='\033[0m'   # Clear color and formatting
-
 
 update-brew() {
     if ! which brew &>/dev/null; then return; fi
@@ -53,8 +51,8 @@ update-npm() {
 update-yarn() {
     if ! which yarn &>/dev/null; then return; fi
 
-    echo -e "${GREEN}Updating Brew Formula's${CLEAR}"
-    yarn upgrade --latest
+    echo -e "${GREEN}Updating yarn 's${CLEAR}"
+    brew upgrade yarn
 }
 
 update-pip2() {
@@ -89,10 +87,7 @@ update-macos() {
     softwareupdate -i -a
 }
 
-update-office() {
-    echo -e "\n${GREEN}Updating MS-Office${CLEAR}"
-    /Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS/msupdate --install
-}
+
 
 update-all() {
     update-brew
@@ -101,7 +96,6 @@ update-all() {
     update-pip2
     update-pip3
     update-app_store
-    update-office
     update-macos
 }
 
