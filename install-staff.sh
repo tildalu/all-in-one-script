@@ -56,6 +56,7 @@ install-dev-tools() {
     echo -e "${YELLOW}Install mas-cli${CLEAR}"
     brew install mas
 
+    
 }
 
 install-basic-tools() {

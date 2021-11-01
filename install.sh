@@ -83,6 +83,16 @@ install-dev-tools() {
     ## ngrok
     echo -e "${YELLOW}Install ngrok${CLEAR}"
     brew install ngrok
+
+    ## android-platform-tools (for adb usings)
+    echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
+    brew install homebrew/cask/android-platform-tools
+
+    ## watchman
+    echo -e "${YELLOW}Install watchman ${CLEAR}"
+    brew install watchman
+    
+
 }
 
 install-basic-tools() {
@@ -138,8 +148,8 @@ install-all() {
     echo -e "${GREEN}Starting Install basic-tools !${CLEAR}"
     install-basic-tools
 
-    echo -e "${GREEN}Starting Install others !${CLEAR}"
-    install-others
+    ## echo -e "${GREEN}Starting Install others !${CLEAR}"
+    ## install-others
 }
 
 install-all

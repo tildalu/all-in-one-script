@@ -18,12 +18,10 @@
 #
 #  and now you can call the script any time :)
 
-
 # Text Color Variables
 GREEN='\033[32m'  # Green
 YELLOW='\033[33m' # YELLOW
 CLEAR='\033[0m'   # Clear color and formatting
-
 
 update-brew() {
     if ! which brew &>/dev/null; then return; fi
@@ -54,7 +52,7 @@ update-yarn() {
     if ! which yarn &>/dev/null; then return; fi
 
     echo -e "${GREEN}Updating Brew Formula's${CLEAR}"
-    yarn upgrade --latest
+    sudo yarn upgrade --latest
 }
 
 update-pip2() {
