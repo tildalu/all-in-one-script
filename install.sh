@@ -84,6 +84,10 @@ install-dev-tools() {
     echo -e "${YELLOW}Install ngrok${CLEAR}"
     brew install ngrok
 
+    ## android-studio
+    echo -e "${YELLOW}Install android-studio${CLEAR}"
+    brew install --cask android-studio
+
     ## android-platform-tools (for adb usings)
     echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
     brew install homebrew/cask/android-platform-tools
@@ -91,7 +95,6 @@ install-dev-tools() {
     ## watchman
     echo -e "${YELLOW}Install watchman ${CLEAR}"
     brew install watchman
-    
 
 }
 
