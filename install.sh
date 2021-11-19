@@ -8,28 +8,30 @@ CLEAR='\033[0m'   # Clear color and formatting
 # Setup script for setting up a new macos machine
 echo -e "${GREEN}Starting Install !${CLEAR}"
 
-## Setup /etc/sudoers for sudo without password prompt
-# echo -e "${GREEN}Setup NOPASSWD for %staff ${CLEAR}"
-# sudo grep -q '^%staff' /etc/sudoers || sudo sed -i '' 's/^%admin.*/&\n%staff          ALL = (ALL) NOPASSWD: ALL/' /etc/sudoers
-
-## Command Line Tools for Xcode
-# echo "Install command line developer tools"
-# xcode-select --install
-# xcode-select -p &> /dev/null
-# if [ $? -ne 0 ]; then
-#   echo "Xcode CLI tools not found. Installing them..."
-#   touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
-#   PROD=$(softwareupdate -l |
-#     grep "\*.*Command Line" |
-#     head -n 1 | awk -F"*" '{print $2}' |
-#     sed -e 's/^ *//' |
-#     tr -d '\n')
-#   softwareupdate -i "$PROD" -v;
-# else
-#   echo "Xcode CLI tools OK"
-# fi
+# Setup /etc/sudoers for sudo without password prompt
+echo -e "${GREEN}Setup NOPASSWD for %staff ${CLEAR}"
+sudo grep -q '^%staff' /etc/sudoers || sudo sed -i '' 's/^%admin.*/&\n%staff          ALL = (ALL) NOPASSWD: ALL/' /etc/sudoers
 
 install-dev-tools() {
+
+
+    # Command Line Tools for Xcode
+    echo "Install command line developer tools"
+    xcode-select --install
+    xcode-select -p &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo "Xcode CLI tools not found. Installing them..."
+        touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+        PROD=$(softwareupdate -l |
+            grep "\*.*Command Line" |
+            head -n 1 | awk -F"*" '{print $2}' |
+            sed -e 's/^ *//' |
+            tr -d '\n')
+        softwareupdate -i "$PROD" -v
+    else
+        echo "Xcode CLI tools OK"
+    fi
+
 
     ## Homebrew
     echo -e "${YELLOW}Install Homebrew${CLEAR}"
@@ -40,6 +42,10 @@ install-dev-tools() {
     ## NVM
     echo -e "${YELLOW}Install NVM${CLEAR}"
     brew install nvm
+
+    ## nginx
+    echo -e "${YELLOW}Install nginx${CLEAR}"
+    brew install nginx
 
     ## git
     echo -e "${YELLOW}Install GIT${CLEAR}"
@@ -96,6 +102,11 @@ install-dev-tools() {
     echo -e "${YELLOW}Install watchman ${CLEAR}"
     brew install watchman
 
+    ## MongoDB
+    echo -e "${YELLOW}Install MongoDB ${CLEAR}"
+    brew tap mongodb/brew
+    brew install mongodb-community@5.0
+
 }
 
 install-basic-tools() {
@@ -144,6 +155,13 @@ install-others() {
     brew install spotify
 }
 
+check-by-doctor() {
+
+    echo -e "${GREEN}Checking by Brew Doctor!${CLEAR}"
+    brew doctor
+
+}
+
 install-all() {
     echo -e "${GREEN}Starting Install dev-tools !${CLEAR}"
     install-dev-tools
@@ -151,8 +169,11 @@ install-all() {
     echo -e "${GREEN}Starting Install basic-tools !${CLEAR}"
     install-basic-tools
 
-    ## echo -e "${GREEN}Starting Install others !${CLEAR}"
-    ## install-others
+    echo -e "${GREEN}Starting Install others !${CLEAR}"
+    install-others
+
+    echo -e "${GREEN}Starting Check !${CLEAR}"
+    check-by-doctor
 }
 
 install-all
