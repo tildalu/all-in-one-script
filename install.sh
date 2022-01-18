@@ -166,7 +166,7 @@ check-by-doctor() {
 
 }
 
-laravel-packages() {
+php-laravel-packages() {
 
     ## php
     echo -e "${YELLOW}Install php${CLEAR}"
@@ -216,6 +216,9 @@ install-all() {
 
     echo -e "${GREEN}Starting Install others !${CLEAR}"
     install-others
+
+    echo -e "${GREEN}Starting Install php-laravel-packages !${CLEAR}"
+    php-laravel-packages
 
     echo -e "${GREEN}Starting Check !${CLEAR}"
     check-by-doctor
