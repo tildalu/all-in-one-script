@@ -9,11 +9,10 @@ CLEAR='\033[0m'   # Clear color and formatting
 echo -e "${GREEN}Starting Install !${CLEAR}"
 
 # Setup /etc/sudoers for sudo without password prompt
-echo -e "${GREEN}Setup NOPASSWD for %staff ${CLEAR}"
+echo -e "${GREEN}Setup NOPASSWD for %staff ${CLEAR}"
 sudo grep -q '^%staff' /etc/sudoers || sudo sed -i '' 's/^%admin.*/&\n%staff          ALL = (ALL) NOPASSWD: ALL/' /etc/sudoers
 
 install-dev-tools() {
-
 
     # Command Line Tools for Xcode
     echo "Install command line developer tools"
@@ -32,30 +31,11 @@ install-dev-tools() {
         echo "Xcode CLI tools OK"
     fi
 
-
     ## Homebrew
     echo -e "${YELLOW}Install Homebrew${CLEAR}"
     CI=1
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew update
-
-    ## NVM
-    echo -e "${YELLOW}Install NVM${CLEAR}"
-    brew install nvm
-
-    ## nginx
-    echo -e "${YELLOW}Install nginx${CLEAR}"
-    brew install nginx
-
-    ## git
-    echo -e "${YELLOW}Install GIT${CLEAR}"
-    brew install git
-    git config --global user.email "tilda.lu@trunk-studio.com"
-    git config --global user.name "Tilda"
-
-    ## yarn
-    echo -e "${YELLOW}Install yarn${CLEAR}"
-    brew install yarn
 
     ## Visual Studio Code
     echo -e "${YELLOW}Install Visual Studio Code${CLEAR}"
@@ -98,6 +78,13 @@ install-dev-tools() {
     echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
     brew install homebrew/cask/android-platform-tools
 
+}
+
+install-dev-software() {
+    ## Python 3.x
+    echo -e "${YELLOW}Install python-3.x${CLEAR}"
+    brew install python
+
     ## watchman
     echo -e "${YELLOW}Install watchman ${CLEAR}"
     brew install watchman
@@ -106,6 +93,24 @@ install-dev-tools() {
     echo -e "${YELLOW}Install MongoDB ${CLEAR}"
     brew tap mongodb/brew
     brew install mongodb-community@5.0
+
+    ## NVM
+    echo -e "${YELLOW}Install NVM${CLEAR}"
+    brew install nvm
+
+    ## nginx
+    echo -e "${YELLOW}Install nginx${CLEAR}"
+    brew install nginx
+
+    ## git
+    echo -e "${YELLOW}Install GIT${CLEAR}"
+    brew install git
+    git config --global user.email "tilda.lu@trunk-studio.com"
+    git config --global user.name "Tilda"
+
+    ## yarn
+    echo -e "${YELLOW}Install yarn${CLEAR}"
+    brew install yarn
 
 }
 
@@ -149,10 +154,9 @@ install-basic-tools() {
 }
 
 install-others() {
-
-    ##Spotify
-    echo -e "${YELLOW}Install Spotify${CLEAR}"
-    brew install spotify
+    # ##Spotify
+    # echo -e "${YELLOW}Install Spotify${CLEAR}"
+    # brew install spotify
 }
 
 check-by-doctor() {
@@ -162,9 +166,50 @@ check-by-doctor() {
 
 }
 
+laravel-packages() {
+
+    ## php
+    echo -e "${YELLOW}Install php${CLEAR}"
+    brew install php
+
+    ## install php@7.2
+    echo -e "${YELLOW}Install php@7.2${CLEAR}"
+    brew tap shivammathur/php
+    brew install shivammathur/php/php@7.2
+
+    ## link to php@7.2
+    echo -e "${YELLOW}Link to php@7.2${CLEAR}"
+    brew unlink php
+    brew link php@7.2
+
+    ## mysql
+    echo -e "${YELLOW}Install mysql${CLEAR}"
+    brew install mysql
+
+    ## start mysql
+    echo -e "${YELLOW}Starting mysql${CLEAR}"
+    brew services start mysql
+
+    ## composer
+    echo -e "${YELLOW}Install composer${CLEAR}"
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+    php composer-setup.php
+    php -r "unlink('composer-setup.php');"
+    ## move to global use
+    sudo mv composer.phar /usr/local/bin/composer
+
+    ## Laravel
+    echo -e "${YELLOW}Install Laravel${CLEAR}"
+    composer global require "laravel/installer"
+}
+
 install-all() {
     echo -e "${GREEN}Starting Install dev-tools !${CLEAR}"
     install-dev-tools
+
+    echo -e "${GREEN}Starting install dev-software !${CLEAR}"
+    install-dev-software
 
     echo -e "${GREEN}Starting Install basic-tools !${CLEAR}"
     install-basic-tools
