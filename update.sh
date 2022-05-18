@@ -51,6 +51,9 @@ update-npm() {
 update-yarn() {
     if ! which yarn &>/dev/null; then return; fi
 
+    echo -e "${GREEN}Updating Brew Formula's${CLEAR}"
+    sudo yarn upgrade --latest
+    
     echo -e "${GREEN}Updating yarn 's${CLEAR}"
     brew upgrade yarn
 }
