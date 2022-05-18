@@ -9,7 +9,6 @@ CLEAR='\033[0m'   # Clear color and formatting
 echo -e "${GREEN}Starting Install !${CLEAR}"
 
 # Setup /etc/sudoers for sudo without password prompt
-sudo -i
 
 install-dev-tools() {
 
