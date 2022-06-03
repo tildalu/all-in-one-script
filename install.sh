@@ -8,10 +8,6 @@ CLEAR='\033[0m'   # Clear color and formatting
 # Setup script for setting up a new macos machine
 echo -e "${GREEN}Starting Install !${CLEAR}"
 
-# Setup /etc/sudoers for sudo without password prompt
-echo -e "${GREEN}Setup NOPASSWD for %staff ${CLEAR}"
-sudo grep -q '^%staff' /etc/sudoers || sudo sed -i '' 's/^%admin.*/&\n%staff          ALL = (ALL) NOPASSWD: ALL/' /etc/sudoers
-
 install-dev-tools() {
 
     # Command Line Tools for Xcode
@@ -52,7 +48,8 @@ install-dev-tools() {
 
     ## Docker, Vagrant
     echo -e "${YELLOW}Install Docker & Vagrant${CLEAR}"
-    brew install docker vagrant
+    brew install vagrant
+    brew install --cask docker
 
     ## SourceTree
     echo -e "${YELLOW}Install SourceTree${CLEAR}"
@@ -71,12 +68,12 @@ install-dev-tools() {
     brew install ngrok
 
     ## android-studio
-    echo -e "${YELLOW}Install android-studio${CLEAR}"
-    brew install --cask android-studio
+    ## echo -e "${YELLOW}Install android-studio${CLEAR}"
+    ## brew install --cask android-studio
 
     ## android-platform-tools (for adb usings)
-    echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
-    brew install homebrew/cask/android-platform-tools
+    ## echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
+    ## brew install homebrew/cask/android-platform-tools
 
 }
 
@@ -154,6 +151,10 @@ install-basic-tools() {
 }
 
 install-others() {
+    ## Skype
+    echo -e "${YELLOW}Install Skype ${CLEAR}"
+    brew install --cask skype
+
     # ##Spotify
     # echo -e "${YELLOW}Install Spotify${CLEAR}"
     # brew install spotify
@@ -166,6 +167,10 @@ check-by-doctor() {
 
 }
 
+powerlevel10k(){
+    echo -e
+}
+
 php-laravel-packages() {
 
     ## php
@@ -173,14 +178,14 @@ php-laravel-packages() {
     brew install php
 
     ## install php@7.2
-    echo -e "${YELLOW}Install php@7.2${CLEAR}"
-    brew tap shivammathur/php
-    brew install shivammathur/php/php@7.2
+    ## echo -e "${YELLOW}Install php@7.2${CLEAR}"
+    ## brew tap shivammathur/php
+    ## brew install shivammathur/php/php@7.2
 
     ## link to php@7.2
-    echo -e "${YELLOW}Link to php@7.2${CLEAR}"
-    brew unlink php
-    brew link php@7.2
+    ## echo -e "${YELLOW}Link to php@7.2${CLEAR}"
+    ## brew unlink php
+    ## brew link php@7.2
 
     ## mysql
     echo -e "${YELLOW}Install mysql${CLEAR}"
