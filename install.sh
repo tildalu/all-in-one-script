@@ -66,7 +66,6 @@ install-dev-tools() {
     ## ngrok
     echo -e "${YELLOW}Install ngrok${CLEAR}"
     brew install ngrok
-
     ## android-studio
     ## echo -e "${YELLOW}Install android-studio${CLEAR}"
     ## brew install --cask android-studio
@@ -74,7 +73,6 @@ install-dev-tools() {
     ## android-platform-tools (for adb usings)
     ## echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
     ## brew install homebrew/cask/android-platform-tools
-
 }
 
 install-dev-software() {
@@ -108,6 +106,11 @@ install-dev-software() {
     ## yarn
     echo -e "${YELLOW}Install yarn${CLEAR}"
     brew install yarn
+
+    ## hexo
+    echo -e "${YELLOW}Install hexo${CLEAR}"
+    npm install -g hexo-cli
+    echo 'PATH="$PATH:./node_modules/.bin"' >>~/.profile
 
 }
 
@@ -167,8 +170,10 @@ check-by-doctor() {
 
 }
 
-powerlevel10k(){
-    echo -e
+powerlevel10k() {
+    echo -e "${YELLOW}Powerlevel 10k!${CLEAR}"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+    echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 }
 
 php-laravel-packages() {
@@ -225,8 +230,12 @@ install-all() {
     echo -e "${GREEN}Starting Install php-laravel-packages !${CLEAR}"
     php-laravel-packages
 
+    echo -e "${GREEN}Starting Install powerlevel10k!${CLEAR}"
+    powerlevel10k
+
     echo -e "${GREEN}Starting Check !${CLEAR}"
     check-by-doctor
+
 }
 
 install-all
