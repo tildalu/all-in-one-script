@@ -112,6 +112,11 @@ install-dev-software() {
     npm install -g hexo-cli
     echo 'PATH="$PATH:./node_modules/.bin"' >>~/.profile
 
+    ## GNU Key
+    echo -e "${YELLOW}Install GNU Key ${CLEAR}"
+    brew install gnupg
+    echo -e "${YELLOW}LIST GNU KEY${CLEAR}"
+    gpg --list-secret-keys --keyid-format=long
 }
 
 install-basic-tools() {
