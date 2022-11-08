@@ -94,10 +94,6 @@ install-dev-software() {
     brew tap mongodb/brew
     brew install mongodb-community@5.0
 
-    ## NVM
-    echo -e "${YELLOW}Install NVM${CLEAR}"
-    brew install nvm
-
     ## nginx
     echo -e "${YELLOW}Install nginx${CLEAR}"
     brew install nginx
@@ -107,11 +103,6 @@ install-dev-software() {
     brew install git
     git config --global user.email "tilda.lu@trunk-studio.com"
     git config --global user.name "Tilda"
-
-    ## yarn
-    echo -e "${YELLOW}Install yarn${CLEAR}"
-    brew install yarn
-
 }
 
 install-basic-tools() {
@@ -209,6 +200,29 @@ setup-zsh() {
     sed -i 's/plugins=(git/plugins=(git zsh-syntax-highlighting/' ~/.zshrc
 }
 
+install-node() {
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Install nvm${CLEAR}"
+    export NVM_DIR="$HOME/.nvm" && (
+        git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+        cd "$NVM_DIR"
+        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+    ) && \. "$NVM_DIR/nvm.sh"
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Install latest lts version${CLEAR}"
+    nvm install --lts
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Enable corepack for yarn and pnpm${CLEAR}"
+    corepack enable
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Add nvm config to zshrc${CLEAR}"
+    echo "export NVM_DIR=\"\$([ -z \"\${XDG_CONFIG_HOME-}\" ] && printf %s \"\${HOME}/.nvm\" || printf %s \"\${XDG_CONFIG_HOME}/nvm\")" >> ~/.zshrc
+    echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\" # This loads nvm" >> ~/.zshrc
+    echo "" >> ~/.zshrc
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Install default node npm nvm yarn plugin for oh-my-zsh${CLEAR}"
+    sed -i '' 's/plugins=(git/plugins=(git node npm nvm yarn/' ~/.zshrc
+}
+
 install-others() {
     # ##Spotify
     # echo -e "${YELLOW}Install Spotify${CLEAR}"
@@ -266,6 +280,9 @@ install-all() {
 
     echo -e "${GREEN}Starting install dev-software !${CLEAR}"
     install-dev-software
+
+    echo -e "\n${GREEN}${BOLD}SETUP ${BLUE}=> ${CYAN}Install Node.js${CLEAR}"
+    install-node
 
     echo -e "\n${GREEN}${BOLD}SETUP ${BLUE}=> ${CYAN}Setup basic config${CLEAR}"
     config-gpg
