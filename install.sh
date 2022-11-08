@@ -153,6 +153,40 @@ install-basic-tools() {
     brew install notion
 }
 
+config-gpg() {
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Install GnuPG${CLEAR}"
+    brew install gnupg
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Install Pinentry${CLEAR}"
+    brew install pinentry-mac
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Config Pinentry${CLEAR}"
+    echo "pinentry-program $(which pinentry-mac)" >> ~/.gnupg/gpg-agent.conf
+    gpgconf --kill gpg-agent
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Setup GPG Sign${CLEAR}"
+    if [ -f "private-key.gpg" ]; then
+        echo -e "${CYAN}${BOLD}CHECK ${BLUE}=> ${GREEN}GPG file exists!${CLEAR}"
+
+        echo -e "\n${CYAN}${BOLD}STEP ${BLUE}=> ${WHITE}Import GPG key${CLEAR}"
+        gpg --import private-key.gpg
+
+        keyid=$(gpg --quiet --import-options import-show --import private-key.gpg | sed -e '2!d' -e 's/^[ \t]*//')
+
+        echo -e "\n${CYAN}${BOLD}STEP ${BLUE}=> ${WHITE}Change trust level${CLEAR}"
+        echo "${keyid}:6:" | gpg --import-ownertrust
+
+        echo -e "\n${CYAN}${BOLD}STEP ${BLUE}=> ${WHITE}Test gpg signing${CLEAR}"
+        echo "test" | gpg --clearsign
+
+        echo -e "\n${CYAN}${BOLD}STEP ${BLUE}=> ${WHITE}Enable git signing${CLEAR}"
+        git config --global user.signingkey "${keyid}"
+        git config --global commit.gpgsign true
+    else
+        echo -e "${CYAN}${BOLD}CHECK ${BLUE}=> ${YELLOW}GPG file not exist, GPG setup skipped!${CLEAR}"
+    fi
+}
+
 install-others() {
     # ##Spotify
     # echo -e "${YELLOW}Install Spotify${CLEAR}"
@@ -210,6 +244,9 @@ install-all() {
 
     echo -e "${GREEN}Starting install dev-software !${CLEAR}"
     install-dev-software
+
+    echo -e "\n${GREEN}${BOLD}SETUP ${BLUE}=> ${CYAN}Setup basic config${CLEAR}"
+    config-gpg
 
     echo -e "${GREEN}Starting Install basic-tools !${CLEAR}"
     install-basic-tools
