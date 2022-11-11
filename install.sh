@@ -272,6 +272,9 @@ php-laravel-packages() {
     ## Laravel
     echo -e "${YELLOW}Install Laravel${CLEAR}"
     composer global require "laravel/installer"
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Install default node npm nvm yarn plugin for oh-my-zsh${CLEAR}"
+    sed -i '' 's/plugins=(git/plugins=(git composer laravel laravel5/' ~/.zshrc
 }
 
 install-all() {
