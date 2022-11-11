@@ -198,6 +198,9 @@ setup-zsh() {
     echo -e "${CYAN}${BOLD}PLUGIN ${BLUE}=> ${WHITE}zsh-syntax-highlighting${CLEAR}"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     sed -i '' 's/plugins=(git/plugins=(git zsh-syntax-highlighting/' ~/.zshrc
+
+    echo -e "\n${YELLOW}${BOLD}STEP ${BLUE}=> ${WHITE}Install default plugins for python and docker for oh-my-zsh${CLEAR}"
+    sed -i '' 's/plugins=(git/plugins=(git python pip docker docker-compose/' ~/.zshrc
 }
 
 install-node() {
