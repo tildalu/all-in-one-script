@@ -287,14 +287,14 @@ install-all() {
     echo -e "${GREEN}Starting install dev-software !${CLEAR}"
     install-dev-software
 
+    echo -e "\n${GREEN}${BOLD}SETUP ${BLUE}=> ${CYAN}Setup basic config${CLEAR}"
+    config-gpg
+
     echo -e "\n${GREEN}${BOLD}SETUP ${BLUE}=> ${CYAN}Setup Z-Shell${CLEAR}"
     setup-zsh
 
     echo -e "\n${GREEN}${BOLD}SETUP ${BLUE}=> ${CYAN}Install Node.js${CLEAR}"
     install-node
-
-    echo -e "\n${GREEN}${BOLD}SETUP ${BLUE}=> ${CYAN}Setup basic config${CLEAR}"
-    config-gpg
 
     echo -e "${GREEN}Starting Install basic-tools !${CLEAR}"
     install-basic-tools
