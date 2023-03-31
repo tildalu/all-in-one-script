@@ -121,8 +121,12 @@ install-dev-software() {
 
 install-basic-tools() {
     ## Google Chrome
-    echo -e "${YELLOW}Install Google Chrome${CLEAR}"
-    brew install google-chrome
+    ## echo -e "${YELLOW}Install Google Chrome${CLEAR}"
+    ## brew install google-chrome
+    
+    ## Brave
+    echo -e "${YELLOW}Install Brave${CLEAR}"
+    brew install --cask brave-browser
 
     ## Google Drive
     echo -e "${YELLOW}Install Google Drive${CLEAR}"
