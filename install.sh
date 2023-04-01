@@ -283,16 +283,6 @@ php-laravel-packages() {
     echo -e "${YELLOW}Install php${CLEAR}"
     brew install php
 
-    # install php@7.2
-    # echo -e "${YELLOW}Install php@7.2${CLEAR}"
-    # brew tap shivammathur/php
-    # brew install shivammathur/php/php@7.2
-
-    # link to php@7.2
-    # echo -e "${YELLOW}Link to php@7.2${CLEAR}"
-    # brew unlink php
-    # brew link php@7.2
-
     # mysql
     echo -e "${YELLOW}Install mysql${CLEAR}"
     brew install mysql
