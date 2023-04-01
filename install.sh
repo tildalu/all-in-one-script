@@ -86,9 +86,9 @@ install-dev-software() {
     brew install watchman
 
     # MongoDB
-    echo -e "${YELLOW}Install MongoDB ${CLEAR}"
-    brew tap mongodb/brew
-    brew install mongodb-community@5.0
+    #echo -e "${YELLOW}Install MongoDB ${CLEAR}"
+    #brew tap mongodb/brew
+    #brew install mongodb-community@5.0
 
     # NVM
     echo -e "${YELLOW}Install NVM${CLEAR}"
