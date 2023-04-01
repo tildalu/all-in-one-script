@@ -77,6 +77,7 @@ install-dev-tools() {
 }
 
 install-dev-software() {
+
     # Python 3.x
     echo -e "${YELLOW}Install python-3.x${CLEAR}"
     brew install python
