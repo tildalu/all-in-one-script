@@ -78,6 +78,11 @@ install-others() {
     # ##Spotify
     # echo -e "${YELLOW}Install Spotify${CLEAR}"
     # brew install spotify
+    
+    ## Unzip - RAR ZIP 7Z Unarchiver
+    echo -e "${YELLOW}Install Unzip - RAR ZIP 7Z Unarchiver${CLEAR}"
+    mas install 1537056818
+
 }
 
 check-by-doctor() {

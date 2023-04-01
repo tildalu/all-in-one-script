@@ -167,6 +167,88 @@ install-basic-tools() {
     brew install notion
 }
 
+config-gpg() {
+    echo -e "${YELLOW}Install GnuPG${CLEAR}"
+    brew install gnupg
+
+    echo -e "${YELLOW}Install Pinentry${CLEAR}"
+    brew install pinentry-mac
+
+    echo -e "${YELLOW}Config Pinentry${CLEAR}"
+    echo "pinentry-program $(which pinentry-mac)" >>~/.gnupg/gpg-agent.conf
+    gpgconf --kill gpg-agent
+
+    echo -e "${YELLOW}Setup GPG Sign${CLEAR}"
+    if [ -f "private-key.gpg" ]; then
+        echo -e "${YELLOW}GPG file exists!${CLEAR}"
+
+        echo -e "${YELLOW}Import GPG key${CLEAR}"
+        gpg --import private-key.gpg
+
+        keyid=$(gpg --quiet --import-options import-show --import private-key.gpg | sed -e '2!d' -e 's/^[ \t]*//')
+
+        echo -e "${YELLOW}Change trust level${CLEAR}"
+        echo "${keyid}:6:" | gpg --import-ownertrust
+
+        echo -e "${YELLOW}Test gpg signing${CLEAR}"
+        echo "test" | gpg --clearsign
+
+        echo -e "${YELLOW}Enable git signing${CLEAR}"
+        git config --global user.signingkey "${keyid}"
+        git config --global commit.gpgsign true
+    else
+        echo -e "${YELLOW}GPG file not exist, GPG setup skipped!${CLEAR}"
+    fi
+}
+
+setup-zsh() {
+    echo -e "${YELLOW}Install oh-my-zsh${CLEAR}"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+    echo -e "${YELLOW}Set Z-Shell to default shell${CLEAR}"
+    sudo chsh -s $(which zsh) $(whoami)
+
+    echo -e "${YELLOW}Setup oh-my-zsh${CLEAR}"
+
+    echo -e "${YELLOW}Install theme powerlevel10k${CLEAR}"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    sed -i '' 's/ZSH_THEME=\"robbyrussell\"/ZSH_THEME=\"powerlevel10k\/powerlevel10k\"/' ~/.zshrc
+
+    echo -e "${YELLOW}Install plugin zsh-completions${CLEAR}"
+    git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+    sed -i '' 's/source $ZSH\/oh-my-zsh.sh/fpath\+=\${ZSH_CUSTOM\:-\${ZSH\:-~\/.oh-my-zsh}\/custom}\/plugins\/zsh-completions\/src\nZSH_DISABLE_COMPFIX=\"true\"\nsource $ZSH\/oh-my-zsh.sh/' ~/.zshrc
+
+    echo -e "${YELLOW}Install plugin zsh-syntax-highlighting${CLEAR}"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    sed -i '' 's/plugins=(git/plugins=(git zsh-syntax-highlighting/' ~/.zshrc
+
+    echo -e "${YELLOW}Install default plugins for python and docker${CLEAR}"
+    sed -i '' 's/plugins=(git/plugins=(git python pip docker docker-compose/' ~/.zshrc
+}
+
+install-node() {
+    echo -e "${YELLOW}Install nvm${CLEAR}"
+    export NVM_DIR="$HOME/.nvm" && (
+        git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+        cd "$NVM_DIR"
+        git checkout $(git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1))
+    ) && \. "$NVM_DIR/nvm.sh"
+
+    echo -e "${YELLOW}Install latest lts version${CLEAR}"
+    nvm install --lts
+
+    echo -e "${YELLOW}Enable corepack for yarn and pnpm${CLEAR}"
+    corepack enable
+
+    echo -e "${YELLOW}Add nvm config to zshrc${CLEAR}"
+    echo "export NVM_DIR=\"\$([ -z \"\${XDG_CONFIG_HOME-}\" ] && printf %s \"\${HOME}/.nvm\" || printf %s \"\${XDG_CONFIG_HOME}/nvm\")\"" >>~/.zshrc
+    echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\" # This loads nvm" >>~/.zshrc
+    echo "" >>~/.zshrc
+
+    echo -e "${YELLOW}Install default node npm nvm yarn plugin for oh-my-zsh${CLEAR}"
+    sed -i '' 's/plugins=(git/plugins=(git node npm nvm yarn/' ~/.zshrc
+}
+
 install-others() {
     # Skype
     # echo -e "${YELLOW}Install Skype ${CLEAR}"
@@ -226,6 +308,9 @@ php-laravel-packages() {
     # Laravel
     echo -e "${YELLOW}Install Laravel${CLEAR}"
     composer global require "laravel/installer"
+
+    echo -e "${YELLOW}Install default composer and laraval plugin for oh-my-zsh${CLEAR}"
+    sed -i '' 's/plugins=(git/plugins=(git composer laravel laravel5/' ~/.zshrc
 }
 
 install-all() {
@@ -234,6 +319,15 @@ install-all() {
 
     echo -e "${GREEN}Starting install dev-software !${CLEAR}"
     install-dev-software
+
+    echo -e "${GREEN}Setup basic config${CLEAR}"
+    config-gpg
+
+    echo -e "${GREEN}Setup Z-Shell${CLEAR}"
+    setup-zsh
+
+    echo -e "${GREEN}Install Node.js${CLEAR}"
+    install-node
 
     echo -e "${GREEN}Starting Install basic-tools !${CLEAR}"
     install-basic-tools
