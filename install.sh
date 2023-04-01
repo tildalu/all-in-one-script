@@ -27,92 +27,97 @@ install-dev-tools() {
         echo "Xcode CLI tools OK"
     fi
 
-    ## Homebrew
+    # Homebrew
     echo -e "${YELLOW}Install Homebrew${CLEAR}"
     CI=1
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew update
 
-    ## Visual Studio Code
+    # Visual Studio Code
     echo -e "${YELLOW}Install Visual Studio Code${CLEAR}"
     brew install visual-studio-code
 
-    ## mas-cli
-    ## A simple command line interface for the Mac App Store. Designed for scripting and automation.
+    # mas-cli
+    # A simple command line interface for the Mac App Store. Designed for scripting and automation.
     echo -e "${YELLOW}Install mas-cli${CLEAR}"
     brew install mas
 
-    ## VirtualBox
+    # VirtualBox
     echo -e "${YELLOW}Install Virtual Box ${CLEAR}"
     brew install virtualbox virtualbox-extension-pack
 
-    ## Docker, Vagrant
+    # Docker, Vagrant
     echo -e "${YELLOW}Install Docker & Vagrant${CLEAR}"
     brew install vagrant
     brew install --cask docker
 
-    ## SourceTree
+    # SourceTree
     echo -e "${YELLOW}Install SourceTree${CLEAR}"
     brew install --cask sourcetree
 
-    ## iTerm2
+    # iTerm2
     echo -e "${YELLOW}Install iTerm2${CLEAR}"
     brew install iterm2
 
-    ## Appium
+    # Appium
     echo -e "${YELLOW}Install Appium${CLEAR}"
     brew install appium
 
-    ## ngrok
+    # ngrok
     echo -e "${YELLOW}Install ngrok${CLEAR}"
     brew install ngrok
-    ## android-studio
-    ## echo -e "${YELLOW}Install android-studio${CLEAR}"
-    ## brew install --cask android-studio
 
-    ## android-platform-tools (for adb usings)
-    ## echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
-    ## brew install homebrew/cask/android-platform-tools
+    # android-studio
+    # echo -e "${YELLOW}Install android-studio${CLEAR}"
+    # brew install --cask android-studio
+
+    # android-platform-tools (for adb usings)
+    # echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
+    # brew install homebrew/cask/android-platform-tools
 }
 
 install-dev-software() {
-    ## Python 3.x
+    # Python 3.x
     echo -e "${YELLOW}Install python-3.x${CLEAR}"
     brew install python
 
-    ## watchman
+    # watchman
     echo -e "${YELLOW}Install watchman ${CLEAR}"
     brew install watchman
 
-    ## MongoDB
+    # MongoDB
     echo -e "${YELLOW}Install MongoDB ${CLEAR}"
     brew tap mongodb/brew
     brew install mongodb-community@5.0
 
-    ## NVM
+    # NVM
     echo -e "${YELLOW}Install NVM${CLEAR}"
     brew install nvm
 
-    ## nginx
+    # nginx
     echo -e "${YELLOW}Install nginx${CLEAR}"
     brew install nginx
 
-    ## git
+    # git
     echo -e "${YELLOW}Install GIT${CLEAR}"
     brew install git
     git config --global user.email "tilda.lu@trunk-studio.com"
     git config --global user.name "Tilda"
 
-    ## yarn
+    # yarn
     echo -e "${YELLOW}Install yarn${CLEAR}"
     brew install yarn
 
-    ## hexo
+    # pnpm
+    echo -e "${YELLOW}Install pnpm${CLEAR}"
+    brew install pnpm
+
+    # hexo
     echo -e "${YELLOW}Install hexo${CLEAR}"
     npm install -g hexo-cli
     echo 'PATH="$PATH:./node_modules/.bin"' >>~/.profile
 
-    ## GNU Key
+    # GNU Key
     echo -e "${YELLOW}Install GNU Key ${CLEAR}"
     brew install gnupg
     echo -e "${YELLOW}LIST GNU KEY${CLEAR}"
@@ -120,54 +125,54 @@ install-dev-software() {
 }
 
 install-basic-tools() {
-    ## Google Chrome
-    ## echo -e "${YELLOW}Install Google Chrome${CLEAR}"
-    ## brew install google-chrome
-    
-    ## Brave
+    # Google Chrome
+    # echo -e "${YELLOW}Install Google Chrome${CLEAR}"
+    # brew install google-chrome
+
+    # Brave
     echo -e "${YELLOW}Install Brave${CLEAR}"
     brew install --cask brave-browser
 
-    ## Google Drive
+    # Google Drive
     echo -e "${YELLOW}Install Google Drive${CLEAR}"
     brew install google-drive
 
-    ## 1Password
+    # 1Password
     echo -e "${YELLOW}Install 1Password${CLEAR}"
     brew install 1password 1password-cli
 
-    ## Zoom, Slack
+    # Zoom, Slack
     echo -e "${YELLOW}Install Zoom Slack${CLEAR}"
     brew install zoom slack
 
-    ## Sketch, Figma
+    # Sketch, Figma
     echo -e "${YELLOW}Install Sketch Figma${CLEAR}"
     brew install sketch
     brew install figma
 
-    ## Zeplin
+    # Zeplin
     echo -e "${YELLOW}Install zeplin ${CLEAR}"
     brew install zeplin
 
-    ## Line
+    # Line
     echo -e "${YELLOW}Install Line${CLEAR}"
     mas install 539883307
 
-    ## AnyDesk
+    # AnyDesk
     echo -e "${YELLOW}Install AnyDesk${CLEAR}"
     brew install anydesk
 
-    ## Notion
+    # Notion
     echo -e "${YELLOW}Install Notion${CLEAR}"
     brew install notion
 }
 
 install-others() {
-    ## Skype
-    echo -e "${YELLOW}Install Skype ${CLEAR}"
-    brew install --cask skype
+    # Skype
+    # echo -e "${YELLOW}Install Skype ${CLEAR}"
+    # brew install --cask skype
 
-    # ##Spotify
+    # Spotify
     # echo -e "${YELLOW}Install Spotify${CLEAR}"
     # brew install spotify
 }
@@ -187,38 +192,38 @@ powerlevel10k() {
 
 php-laravel-packages() {
 
-    ## php
+    # php
     echo -e "${YELLOW}Install php${CLEAR}"
     brew install php
 
-    ## install php@7.2
-    ## echo -e "${YELLOW}Install php@7.2${CLEAR}"
-    ## brew tap shivammathur/php
-    ## brew install shivammathur/php/php@7.2
+    # install php@7.2
+    # echo -e "${YELLOW}Install php@7.2${CLEAR}"
+    # brew tap shivammathur/php
+    # brew install shivammathur/php/php@7.2
 
-    ## link to php@7.2
-    ## echo -e "${YELLOW}Link to php@7.2${CLEAR}"
-    ## brew unlink php
-    ## brew link php@7.2
+    # link to php@7.2
+    # echo -e "${YELLOW}Link to php@7.2${CLEAR}"
+    # brew unlink php
+    # brew link php@7.2
 
-    ## mysql
+    # mysql
     echo -e "${YELLOW}Install mysql${CLEAR}"
     brew install mysql
 
-    ## start mysql
+    # start mysql
     echo -e "${YELLOW}Starting mysql${CLEAR}"
     brew services start mysql
 
-    ## composer
+    # composer
     echo -e "${YELLOW}Install composer${CLEAR}"
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
     php composer-setup.php
     php -r "unlink('composer-setup.php');"
-    ## move to global use
+    # move to global use
     sudo mv composer.phar /usr/local/bin/composer
 
-    ## Laravel
+    # Laravel
     echo -e "${YELLOW}Install Laravel${CLEAR}"
     composer global require "laravel/installer"
 }
