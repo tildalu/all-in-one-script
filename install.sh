@@ -43,37 +43,37 @@ install-dev-tools() {
     brew install mas
 
     # VirtualBox
-    echo -e "${YELLOW}Install Virtual Box ${CLEAR}"
-    brew install virtualbox virtualbox-extension-pack
+    # echo -e "${YELLOW}Install Virtual Box ${CLEAR}"
+    # brew install virtualbox virtualbox-extension-pack
 
     # Docker, Vagrant
-    echo -e "${YELLOW}Install Docker & Vagrant${CLEAR}"
-    brew install vagrant
-    brew install --cask docker
+    # echo -e "${YELLOW}Install Docker & Vagrant${CLEAR}"
+    # brew install vagrant
+    # brew install --cask docker
 
     # SourceTree
-    echo -e "${YELLOW}Install SourceTree${CLEAR}"
-    brew install --cask sourcetree
+    # echo -e "${YELLOW}Install SourceTree${CLEAR}"
+    # brew install --cask sourcetree
 
     # iTerm2
     echo -e "${YELLOW}Install iTerm2${CLEAR}"
     brew install iterm2
 
     # Appium
-    echo -e "${YELLOW}Install Appium${CLEAR}"
-    brew install appium
+    # echo -e "${YELLOW}Install Appium${CLEAR}"
+    # brew install appium
 
     # ngrok
-    echo -e "${YELLOW}Install ngrok${CLEAR}"
-    brew install ngrok
+    # echo -e "${YELLOW}Install ngrok${CLEAR}"
+    # brew install ngrok
 
     # android-studio
-    # echo -e "${YELLOW}Install android-studio${CLEAR}"
-    # brew install --cask android-studio
+    echo -e "${YELLOW}Install android-studio${CLEAR}"
+    brew install --cask android-studio
 
     # android-platform-tools (for adb usings)
-    # echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
-    # brew install homebrew/cask/android-platform-tools
+    echo -e "${YELLOW}Install android-platform-tools${CLEAR}"
+    brew install homebrew/cask/android-platform-tools
 }
 
 install-dev-software() {
@@ -100,13 +100,13 @@ install-dev-software() {
     source ~/.nvm/nvm.sh
 
     # nginx
-    echo -e "${YELLOW}Install nginx${CLEAR}"
-    brew install nginx
+    # echo -e "${YELLOW}Install nginx${CLEAR}"
+    # brew install nginx
 
     # git
     echo -e "${YELLOW}Install GIT${CLEAR}"
     brew install git
-    git config --global user.email "tilda.lu@trunk-studio.com"
+    git config --global user.email "lu23770127@gmail.com"
     git config --global user.name "Tilda"
 
     # yarn
@@ -114,8 +114,8 @@ install-dev-software() {
     brew install yarn
 
     # pnpm
-    echo -e "${YELLOW}Install pnpm${CLEAR}"
-    brew install pnpm
+    # echo -e "${YELLOW}Install pnpm${CLEAR}"
+    # brew install pnpm
 
     # hexo
     # echo -e "${YELLOW}Install hexo${CLEAR}"
@@ -135,29 +135,32 @@ install-basic-tools() {
     # brew install google-chrome
 
     # Brave
-    echo -e "${YELLOW}Install Brave${CLEAR}"
-    brew install --cask brave-browser
+    # echo -e "${YELLOW}Install Brave${CLEAR}"
+    # brew install --cask brave-browser
 
     # Google Drive
     echo -e "${YELLOW}Install Google Drive${CLEAR}"
     brew install google-drive
 
     # 1Password
-    echo -e "${YELLOW}Install 1Password${CLEAR}"
-    brew install 1password 1password-cli
+    # echo -e "${YELLOW}Install 1Password${CLEAR}"
+    # brew install 1password 1password-cli
 
     # Zoom, Slack
     echo -e "${YELLOW}Install Zoom Slack${CLEAR}"
     brew install zoom slack
 
-    # Sketch, Figma
-    echo -e "${YELLOW}Install Sketch Figma${CLEAR}"
-    brew install sketch
+    # Sketch
+    # echo -e "${YELLOW}Install Sketch ${CLEAR}"
+    # brew install sketch
+
+    #  Figma
+    echo -e "${YELLOW}Install  Figma${CLEAR}"
     brew install figma
 
     # Zeplin
-    echo -e "${YELLOW}Install zeplin ${CLEAR}"
-    brew install zeplin
+    # echo -e "${YELLOW}Install zeplin ${CLEAR}"
+    # brew install zeplin
 
     # Line
     echo -e "${YELLOW}Install Line${CLEAR}"
@@ -327,8 +330,8 @@ install-all() {
     echo -e "${GREEN}Starting Install others !${CLEAR}"
     install-others
 
-    echo -e "${GREEN}Starting Install php-laravel-packages !${CLEAR}"
-    php-laravel-packages
+    # echo -e "${GREEN}Starting Install php-laravel-packages !${CLEAR}"
+    # php-laravel-packages
 
     echo -e "${GREEN}Starting Install powerlevel10k!${CLEAR}"
     powerlevel10k
